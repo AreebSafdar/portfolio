@@ -11,7 +11,7 @@ export default function About() {
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">Journey</h2>
         <p>
-          I'm Areeb Safdar, A frontend developer based in Rahim Yar Khan. I have over 1+ years of experience in building modern web applications.
+          I&apos;m Areeb Safdar, A frontend developer based in Rahim Yar Khan. I have over 1+ years of experience in building modern web applications.
         </p>
       </section>
 
@@ -34,7 +34,7 @@ export default function About() {
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">Experience</h2>
-        <p>I've worked on frontend development and creating websites.</p>
+        <p>I&apos;ve worked on frontend development and creating websites.</p>
       </section>
 
       <section>

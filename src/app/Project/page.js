@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Projects | Portfolio",
-  description: "Areeb's project portfolio showcasing web development projects",
+  description: "Areeb&apos;s project portfolio showcasing web development projects",
 };
 
 const projects = [

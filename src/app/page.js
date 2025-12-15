@@ -21,7 +21,7 @@ export default function Homepage() {
       {/* HERO SECTION */}
       <section className="text-center mt-32">
         <h1 className="text-5xl font-extrabold text-purple-700">
-          Hi, I'm <span className="text-purple-900">AREEB SAFDAR</span>
+          Hi, I&apos;m <span className="text-purple-900">AREEB SAFDAR</span>
         </h1>
 
         <h3 className="text-2xl mt-4 text-gray-700 font-semibold">
@@ -146,9 +146,9 @@ export default function Homepage() {
 
       {/* CONTACT CTA */}
       <section className="text-center mt-32 mb-20">
-        <h2 className="text-3xl font-bold">Let’s Work Together</h2>
+        <h2 className="text-3xl font-bold">Let&apos;s Work Together</h2>
         <p className="text-gray-600 mt-2 max-w-xl mx-auto">
-          I'm always open to discussing new projects and creative ideas.
+          I&apos;m always open to discussing new projects and creative ideas.
         </p>
 
         <button className="mt-6 px-8 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
