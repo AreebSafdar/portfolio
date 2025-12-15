@@ -3,8 +3,6 @@ import momento from './img/momento-instagram-clone.png';
 import linkedin from './img/linkedin-clone.png';
 import AI from './img/AI-chat-IMG.png';
 
-
-
 export const metadata = {
   title: {
     default: "Portfolio | Areeb Safdar",
