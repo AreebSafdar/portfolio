@@ -2,125 +2,101 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const pathname = usePathname();
 
-  // Close dropdown on outside click
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest(".dropdown")) {
-        setIsDropdownOpen(false);
+      if (isMenuOpen && !e.target.closest(".navbar")) {
+        setIsMenuOpen(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  }, [isMenuOpen]);
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/About", label: "About" },
+    { href: "/Project", label: "Projects" },
+    { href: "/Skill", label: "Skills" },
+    { href: "/Contact", label: "Contact" },
+  ];
+
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
-    <nav className="bg-gray-900 border-b border-gray-700 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <nav className="navbar bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Brand */}
+          <Link
+            href="/"
+            className="text-xl md:text-2xl font-mono font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent"
+          >
+            Areeb Safdar
+          </Link>
 
-        {/* Brand */}
-        <Link href="/" className="text-xl font-bold text-gray-100">
-          Portfolio
-        </Link>
-
-        {/* Toggle Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-gray-100 focus:outline-none"
-        >
-          <span className="text-3xl">&#9776;</span>
-        </button>
-
-        {/* Menu */}
-        <div
-          className={`${isMenuOpen ? "block" : "hidden"} w-full md:flex md:items-center md:w-auto transition-all duration-300`}
-        >
-          <ul className="md:flex md:space-x-6 mt-4 md:mt-0">
-            <li>
-              <Link href="/home" className="block py-2 text-gray-100 hover:text-blue-400">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/Blog" className="block py-2 text-gray-100 hover:text-blue-400">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="/Project" className="block py-2 text-gray-100 hover:text-blue-400">
-                Project
-              </Link>
-            </li>
-
-            {/* Dropdown */}
-            <li className="relative dropdown">
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                aria-expanded={isDropdownOpen}
-                className="flex items-center py-2 w-full text-gray-100 hover:text-blue-400 focus:outline-none"
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`font-medium transition-colors ${
+                  isActive(link.href)
+                    ? "text-blue-600"
+                    : "text-gray-700 hover:text-blue-600"
+                }`}
               >
-                Dropdown ▾
-              </button>
-              {isDropdownOpen && (
-                <ul
-                  className="absolute bg-gray-800 shadow-lg rounded-lg mt-2 py-2 w-40 z-10 transition-all duration-300"
-                  role="menu"
-                >
-                  <li>
-                    <Link href="/About" className="block px-4 py-2 text-gray-100 hover:bg-gray-700">
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/Skill" className="block px-4 py-2 text-gray-100 hover:bg-gray-700">
-                      Skills
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/Contact" className="block px-4 py-2 text-gray-100 hover:bg-gray-700">
-                      Contact
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-            {/* Disabled Link */}
-            <li>
-              <span className="block py-2 text-gray-500 cursor-not-allowed">
-                Block
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Desktop Search */}
-        <div className="hidden md:flex">
-          <input
-            type="text"
-            placeholder="Search"
-            className="border border-gray-700 bg-gray-800 text-gray-100 px-3 py-1 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <button className="border border-gray-700 bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-500 transition">
-            Search
+          {/* Mobile Menu Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMenuOpen(!isMenuOpen);
+            }}
+            className="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile Search */}
-      <div className="px-4 pb-4 md:hidden">
-        <input
-          type="text"
-          placeholder="Search"
-          className="border border-gray-700 bg-gray-800 text-gray-100 px-3 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 pb-4">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`font-medium transition-colors ${
+                    isActive(link.href)
+                      ? "text-blue-600"
+                      : "text-gray-700 hover:text-blue-600"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
 }
-
-

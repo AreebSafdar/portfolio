@@ -1,161 +1,241 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { ExternalLink, Github } from 'lucide-react';
 import momento from './img/momento-instagram-clone.png';
 import linkedin from './img/linkedin-clone.png';
 import AI from './img/AI-chat-IMG.png';
 
 export const metadata = {
-  title: {
-    default: "Portfolio | Areeb Safdar",
-    template: "%s | Portfolio",
-  },
+  title: "Home",
   description:
-    "Areeb Safdar portfolio showcasing frontend developer projects and skills",
+    "Areeb Safdar - Frontend Developer Portfolio showcasing modern web development projects and skills",
 };
+
+const projects = [
+  {
+    id: 1,
+    name: "Momento - Instagram Clone",
+    description:
+      "A full-featured Instagram clone with social media feed, user posts, and engagement features. Built with React and Material-UI.",
+    image: momento,
+    tech: ["React.js", "Next.js", "Material-UI", "Redux"],
+    github: "https://github.com/AreebSafdar",
+    demo: null,
+  },
+  {
+    id: 2,
+    name: "LinkedIn Clone",
+    description:
+      "Professional networking platform featuring user profiles, connection requests, and feed with posts in a clean responsive layout.",
+    image: linkedin,
+    tech: ["React", "Next.js", "Material-UI", "Axios"],
+    github: "https://github.com/AreebSafdar",
+    demo: null,
+  },
+  {
+    id: 3,
+    name: "AI Chat & Image Generator",
+    description:
+      "AI-powered application with chat interface and image generation capabilities. Modern UI with Tailwind CSS.",
+    image: AI,
+    tech: ["React", "Next.js", "Tailwind CSS"],
+    github: "https://github.com/AreebSafdar",
+    demo: null,
+  },
+];
+
+const technologies = [
+  { name: "React", icon: "/icons/react.svg" },
+  { name: "Next.js", icon: "/icons/nextjs.svg" },
+  { name: "JavaScript", icon: "/icons/javascript.svg" },
+  { name: "HTML5", icon: "/icons/html5.svg" },
+  { name: "CSS3", icon: "/icons/css3.svg" },
+  { name: "Tailwind", icon: "/icons/tailwindcss.svg" },
+  { name: "Git", icon: "/icons/git.svg" },
+  { name: "VS Code", icon: "/icons/vscode.svg" },
+];
 
 export default function Homepage() {
   return (
-    <div className="px-6 md:px-20 lg:px-28 font-sans">
-
+    <div className="min-h-screen">
       {/* HERO SECTION */}
-      <section className="text-center mt-32">
-        <h1 className="text-5xl font-extrabold text-purple-700">
-          Hi, I&apos;m <span className="text-purple-900">AREEB SAFDAR</span>
-        </h1>
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
+            Hi, I&apos;m{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              Areeb Safdar
+            </span>
+          </h1>
 
-        <h3 className="text-2xl mt-4 text-gray-700 font-semibold">
-          A Frontend Developer
-        </h3>
+          <h2 className="text-2xl md:text-3xl text-gray-700 font-mono font-medium mb-6">
+            Frontend Developer
+          </h2>
 
-        <p className="mt-4 max-w-2xl mx-auto text-gray-600 leading-relaxed">
-          Innovative and detail-oriented Frontend Developer with a strong
-          foundation in modern web technologies. Passionate about building clean,
-          responsive, and user-friendly web interfaces.
-        </p>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto text-gray-600 leading-relaxed mb-10">
+            Innovative and detail-oriented Frontend Developer with a strong
+            foundation in modern web technologies. Passionate about building clean,
+            responsive, and user-friendly web interfaces.
+          </p>
 
-        {/* Buttons */}
-        <div className="mt-8 space-x-4">
-          <a
-            href="/Project"
-            className="px-6 py-3 rounded-lg text-white font-medium bg-linear-to-r from-purple-700 via-fuchsia-600 to-pink-500"
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/Project" className="btn-primary">
+              View My Work
+            </Link>
+
+            <Link href="/Contact" className="btn-secondary">
+              Contact Me
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED PROJECTS SECTION */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900">
+            Featured Projects
+          </h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Here are some of my recent projects showcasing my skills in modern web development
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="card group"
+              >
+                {/* Project Image */}
+                <div className="relative h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+
+                {/* Project Info */}
+                <h3 className="text-xl font-bold mb-2 text-gray-900">
+                  {project.name}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-medium"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex gap-3 mt-auto">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 transition-colors"
+                  >
+                    <Github size={16} />
+                    <span>GitHub</span>
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/Project"
+              className="inline-block px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-600 hover:text-white transition-all duration-300"
+            >
+              View All Projects
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SKILLS & TECHNOLOGIES SECTION */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900">
+            Skills & Technologies
+          </h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Technologies and tools I use to bring ideas to life
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {technologies.map((tech) => (
+              <div
+                key={tech.name}
+                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center gap-4 group"
+              >
+                <div className="w-16 h-16 relative group-hover:scale-110 transition-transform duration-300">
+                  <Image
+                    src={tech.icon}
+                    alt={tech.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="font-semibold text-gray-800 text-center">
+                  {tech.name}
+                </h3>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/Skill"
+              className="inline-block px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-600 hover:text-white transition-all duration-300"
+            >
+              View All Skills
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT CTA SECTION */}
+      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-400 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Let&apos;s Work Together
+          </h2>
+          <p className="text-lg md:text-xl mb-8 opacity-90">
+            I&apos;m always open to discussing new projects, creative ideas, or
+            opportunities to be part of your vision.
+          </p>
+
+          <Link
+            href="/Contact"
+            className="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            View My Work
-          </a>
-
-          <a
-            href="/contact"
-            className="px-6 py-3 rounded-lg font-medium bg-linear-to-r from-pink-200 to-purple-100 text-gray-800"
-          >
-            Contact Me
-          </a>
+            Get in Touch
+          </Link>
         </div>
       </section>
-
-      {/* PROJECTS SECTION */}
-      <section className="mt-32">
-        <h2 className="text-3xl font-bold text-center mb-10">
-          Featured Projects
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-          {/* CARD */}
-          <div className="border rounded-xl p-5 shadow hover:shadow-lg transition">
-            <div className="h-40 bg-gray-200 rounded mb-4">
-              <Image src={momento} alt="instagram clone"></Image>
-            </div>
-            <h3 className="text-xl font-semibold">Momento Instagram clone</h3>
-            <p className="text-gray-600 mt-2">
-              Momento Instagram clone application interface showing social media feed with user posts and engagement features
-            </p>
-          </div>
-
-          <div className="border rounded-xl p-5 shadow hover:shadow-lg transition">
-            <div className="h-40 bg-gray-200 rounded mb-4">
-              <Image src={linkedin} alt="linkedin clone"></Image>
-            </div>
-            <h3 className="text-xl font-semibold">linkedin clone</h3>
-            <p className="text-gray-600 mt-2">
-              LinkedIn clone profile dashboard featuring user profile section at top, connection requests area, and feed displaying shared posts and professional updates in a clean responsive layout with blue accent colors
-            </p>
-          </div>
-
-          <div className="border rounded-xl p-5 shadow hover:shadow-lg transition">
-            <div className="h-40 bg-gray-200 rounded mb-4">
-              <Image src={AI} alt="AI-Chat-Image"></Image>
-            </div>
-            <h3 className="text-xl font-semibold">Ai-Chat-Image</h3>
-            <p className="text-gray-600 mt-2">
-              AI chat and image generation application interface with user input area, chat history display, and image generation features.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* SKILLS SECTION */}
-      <section className="mt-32 text-center">
-        <h2 className="text-3xl font-bold mb-8">My Skills</h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
-
-          <div className="p-6 border rounded-xl shadow">
-            <div className="mx-auto bg-purple-300 text-white w-14 h-14 flex items-center justify-center rounded-full text-2xl">
-              ✦
-            </div>
-            <h4 className="font-semibold mt-4">Editing</h4>
-            <p className="text-gray-600 text-sm">
-              PicLumen, CapCut, Snap, InVideo
-            </p>
-          </div>
-
-          <div className="p-6 border rounded-xl shadow">
-            <div className="mx-auto bg-blue-300 text-white w-14 h-14 flex items-center justify-center rounded-full text-2xl">
-              ⚙
-            </div>
-            <h4 className="font-semibold mt-4">Frameworks</h4>
-            <p className="text-gray-600 text-sm">React.js, Next.js, Tailwind, Material-UI, Bootstrap</p>
-          </div>
-
-          <div className="p-6 border rounded-xl shadow">
-            <div className="mx-auto bg-blue-400 text-white w-14 h-14 flex items-center justify-center rounded-full text-2xl">
-              {"</>"}
-            </div>
-            <h4 className="font-semibold mt-4">Programming Languages</h4>
-            <p className="text-gray-600 text-sm">HTML, CSS, JavaScript</p>
-          </div>
-
-          <div className="p-6 border rounded-xl shadow">
-            <div className="mx-auto bg-blue-400 text-white w-14 h-14 flex items-center justify-center rounded-full text-2xl">
-              🎨
-            </div>
-            <h4 className="font-semibold mt-4">Graphic Design</h4>
-            <p className="text-gray-600 text-sm">PicLumen, PixelLab</p>
-          </div>
-
-          <div className="p-6 border rounded-xl shadow">
-            <div className="mx-auto bg-blue-500 text-white w-14 h-14 flex items-center justify-center rounded-full text-2xl">
-              ⚡
-            </div>
-            <h4 className="font-semibold mt-4">Tools</h4>
-            <p className="text-gray-600 text-sm"> Github, Visual Studio Code</p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* CONTACT CTA */}
-      <section className="text-center mt-32 mb-20">
-        <h2 className="text-3xl font-bold">Let&apos;s Work Together</h2>
-        <p className="text-gray-600 mt-2 max-w-xl mx-auto">
-          I&apos;m always open to discussing new projects and creative ideas.
-        </p>
-
-        <button className="mt-6 px-8 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
-          Get in Touch
-        </button>
-      </section>
-
     </div>
   );
 }
-
-
