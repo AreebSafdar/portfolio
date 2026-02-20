@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { MapPin, Mail, Calendar, Code } from "lucide-react";
+import { MapPin, Calendar, Code } from "lucide-react";
 
 export const metadata = {
   title: "About",
