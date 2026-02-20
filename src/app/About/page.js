@@ -4,7 +4,6 @@ export const metadata = {
   title: "About",
   description: "About Areeb Safdar - Frontend Developer specializing in React, Next.js, and modern web technologies",
 };
-
 export default function About() {
   const highlights = [
     {
